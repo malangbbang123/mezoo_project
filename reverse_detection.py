@@ -56,9 +56,7 @@ def plot_pq(id, reverse, pred_reverse, temp, q, p_min, p_max, t_max, t_min):
     plt.legend()
     plt.show()
    
-def compute_gradients(x, y):
-    gradients = np.gradient(y, x)
-    return gradients
+
                 
             
 
