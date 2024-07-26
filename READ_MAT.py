@@ -18,7 +18,7 @@ def read_rpeaks(file):
     return rpeaks
 
 def read_lost(file): 
-    return np.where(file['data_lost'] != True)
+    return np.where(file['data_lost'] != False)
     
 
 
