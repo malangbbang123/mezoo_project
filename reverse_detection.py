@@ -19,8 +19,8 @@ def rri_ver_2(signal, sr=250):
 def p_detection(temp):
     q_peak = np.min(temp[int(len(temp)*0.4)-10:int(len(temp)*0.4)])
     q_index = np.where(temp == q_peak)[0][0]
-    p_min = np.min(temp[20:q_index-10])
-    p_max = np.max(temp[20:q_index-10])
+    p_min = np.min(temp[25:q_index-10])
+    p_max = np.max(temp[25:q_index-10])
     return q_peak, q_index, p_min, p_max
 
 def reverse_caculate(p_min, p_max):
@@ -35,9 +35,19 @@ def median_filter(signal):
     xx1 = medfilt(signal, 29)
     baseline = medfilt(xx1, 99)
     return signal - baseline
+
+def plot_pq(id, reverse, pred_reverse, temp, q, p_min, p_max, t_max, t_min):
+    plt.title(f"{id}/{pred_reverse}")
+    plt.plot(temp)
+    plt.scatter(q+40, temp[q+40], color="red", label="q")
+    plt.scatter(p_min+30, temp[p_min+30], color="purple", label="p min")
+    plt.scatter(p_max+30, temp[p_max+30], color="yellow", label="p max")
+    plt.scatter(t_max+120, temp[t_max+120],color="blue", label="t_max")
+    plt.scatter(t_min+120, temp[t_min+120], color="darkkhaki", label="t_min")
+    plt.legend()
+    plt.show()
    
+def compute_gradients(x, y):
+    gradients = np.gradient(y, x)
+    return gradients
                      
-def squared_signal_detection(signal, threshold=0.4953):
-    pattern = [-0.125, -0.125, -0.125, -0.125, 0, 0, 0, 0, -0.125, -0.125, -0.125, -0.125, 0, 0, 0, 0, -0.125, -0.125, -0.125, -0.125, 0, 0, 0, 0, -0.125, -0.125, -0.125, -0.125]
-    distance = dtw.distance(pattern, signal)
-    return distance, threshold
