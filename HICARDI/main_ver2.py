@@ -1,5 +1,5 @@
-from reverse_detection import *
-from READ_MAT import *
+from git.HICARDI.reverse_detection import *
+from git.HICARDI.READ_MAT import *
 import glob
 import os
 import matplotlib.pyplot as plt

@@ -1,4 +1,4 @@
-from HRV_240516 import *
+from git.SHHS.HRV_240516 import *
 import pickle
 import time
 from noise_detection import median_filter, squared_signal_detection
